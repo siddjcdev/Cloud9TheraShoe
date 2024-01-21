@@ -1,6 +1,6 @@
 import asyncio
 import machine
-from microdot_asyncio import Microdot, Response,
+from microdot_asyncio import Microdot, Response, send_file
 from microdot_utemplate import render_template
 import motorcontroller
 import home_page
@@ -64,7 +64,15 @@ async def stop_motor(request):
     global motor_task_stop
     motor_task_stop = asyncio.create_task(motorcontroller.stop_motors())
     #await asyncio.sleep_ms(1_000)
-    
+
+
+
+@app.route('/assets/<path:path>')
+def static(request, path):
+    if '..' in path:
+        # directory traversal is not allowed
+        return 'Not found', 404
+    return send_file('assets/' + path)   
     
 
 def start_webserver():
