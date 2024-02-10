@@ -13,8 +13,8 @@ motor_task_stop  = None
 
 
 
-led = machine.Pin(2,machine.Pin.OUT)
-led.off()
+led = machine.Pin(25,machine.Pin.OUT)
+
 
 
 @app.before_request
@@ -39,15 +39,17 @@ async def index(request):
 
 
 
-# @app.route('/')
-# def hello(request):
-#     if led.value() == 1:
-#         led_state = "ON"
-#         print("led is ON")
-#     elif led.value()== 0:
-#         led_state = "OFF"
-#         print("led is OFF")
-#     return (home_page.build_home(led_state))
+@app.route('/blink')
+async def blink(request):
+    if led.value() == 1:
+        led_state = "ON"
+        print("led is ON")
+        led.off()
+    elif led.value()== 0:
+        led_state = "OFF"
+        print("led is OFF")
+        led.on()
+    #return (home_page.build_home(led_state))
 
 @app.route('/motor/start') 
 async def start_motor(request):
