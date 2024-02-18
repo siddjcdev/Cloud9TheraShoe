@@ -73,6 +73,8 @@
 			$main._show = function(id, initial) {
 
 				var $article = $main_articles.filter('#' + id);
+				console.log('article id:' + id);
+				console.log('$article:' + $article);
 
 				// No such article? Bail.
 					if ($article.length == 0)
