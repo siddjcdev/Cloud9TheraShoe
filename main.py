@@ -1,31 +1,24 @@
 import asyncio
 import machine
-from microdot_asyncio import Microdot, Response,
+from microdot_asyncio import Microdot, Response, send_file
 from microdot_utemplate import render_template
-import motorcontroller
-import home_page
+import motorManager
+import accelManager
+# import home_page
 
 Response.default_content_type = 'text/html'
 
 app = Microdot()
-motor_task_start = None
-motor_task_stop  = None
-
-
-
-led = machine.Pin(2,machine.Pin.OUT)
-led.off()
+motor_task = None
 
 
 @app.before_request
 async def pre_request_manager(request):
-
-    if motor_task_start:
-        motor_task_start.cancel()
-        print("motor_task_start has been cancelled")
-    if motor_task_stop:
-        motor_task_stop.cancel()
-        print("motor_task_stop has been cancelled")
+    print("Entering pre_request_manager=> request.path=", request.path)
+    if "motor" in request.path:
+        if motor_task:
+            motor_task.cancel()
+            print("motor_task has been cancelled")
 
 @app.get('/')
 async def index(request):
@@ -33,38 +26,41 @@ async def index(request):
     return render_template('index.html', name="world")
     #return render_template('index.html')
 
-@app.route('/home')
-async def index(request):
-    return render_template('home.html', led_value=0)
+@app.route('/blink')
+async def blink(request):
+    if led.value() == 1:
+        led_state = "ON"
+        print("led is ON")
+        led.off()
+    elif led.value()== 0:
+        led_state = "OFF"
+        print("led is OFF")
+        led.on()
 
-
-
-# @app.route('/')
-# def hello(request):
-#     if led.value() == 1:
-#         led_state = "ON"
-#         print("led is ON")
-#     elif led.value()== 0:
-#         led_state = "OFF"
-#         print("led is OFF")
-#     return (home_page.build_home(led_state))
-
-@app.route('/motor/start') 
+@app.post('/motor/control') 
 async def start_motor(request):
     print("starting motors...")
+    print("motor_level:", request.json['level'])
+    level = int(request.json['level'])
+    #level = (level-1)
+    global motor_task
+    motor_task = asyncio.create_task(motorManager.intensity(level))
+    return 'Motor command accepted :)'
     
-    global motor_task_start
-    motor_task_start = asyncio.create_task(motorcontroller.start_motors())
+    
+@app.get('/accel') 
+async def get_accel_values(request):
+    print("Getting shoe position..")
+    return accelManager.get_data()
     #await asyncio.sleep_ms(1_000)
-    
-@app.route('/motor/stop') 
-async def stop_motor(request):
-    print("stopping motors...")
-    
-    global motor_task_stop
-    motor_task_stop = asyncio.create_task(motorcontroller.stop_motors())
-    #await asyncio.sleep_ms(1_000)
-    
+
+
+@app.route('/assets/<path:path>')
+def static(request, path):
+    if '..' in path:
+        # directory traversal is not allowed
+        return 'Not found', 404
+    return send_file('assets/' + path)   
     
 
 def start_webserver():
