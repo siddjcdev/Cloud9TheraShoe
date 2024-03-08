@@ -1,0 +1,171 @@
+{% args name %}
+<!DOCTYPE HTML>
+<!--
+	Dimension by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Cloud9 Therapeutic Shoe</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+			.table .column{
+				width: 100px;
+				float: left;
+			}
+
+			.table .column.first{
+				clear: left;   
+			}
+		</style>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="logo">
+							<span class="icon fa-gem"></span>
+						</div>
+						<div class="content">
+							<div class="inner">
+								<h1>Cloud9 Therapeutic Shoes</h1>
+								<p>Take a step towards better health</p>
+							</div>
+						</div>
+						<nav>
+							<ul>
+								<li><a href="#message">Massage</a></li>
+								<li><a href="#diagnose">Diagnose</a></li>
+								<li><a href="#heat">Heat</a></li>
+								<li><a href="#help">About</a></li>
+								<!-- <li><a href="#elements">Elements</a></li> -->
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Message -->
+							<article id="message">
+								<h2 class="major">Massage</h2>
+								<P> This feature of the Cloud9 Therapeurtic Shoes uses the Raspberry Pi Pico and multiple vibrator motors to massage your foot. Be prepared to experience a spa on your legs!</P>
+								<section>
+									<!-- <span class="image main"><img src="assets/images/pic01.jpg" alt="" /></span> -->
+									<h3 class="major">Intensity Level</h3>
+									<p>This slider is for adjusting the intensity of the shoe's massage. Slide it to the right to start. You can also use the buttons to adjust the vibrator motors.</p>
+									<div id="outer-container">
+										<div id="inner-container">
+											<div class="slider">
+  
+												<a href="#slide-1" id="slider1" class="slide-control stop" onclick="setMotorIntensity(0)">S</a>
+												<a href="#slide-2" id="slider2" class="slide-control low" onclick="setMotorIntensity(1)">1</a>
+												<a href="#slide-3" id="slider3" class="slide-control medium" onclick="setMotorIntensity(2)">2</a>
+												<a href="#slide-4" id="slider4" class="slide-control high" onclick="setMotorIntensity(3)">3</a>
+												<a href="#slide-5" id="slider5" class="slide-control max" onclick="setMotorIntensity(4)">4</a>
+											  
+												<div class="slides">
+												  <div id="slide-1" class="stop">
+													Stop
+												  </div>
+												  <div id="slide-2" class="low">
+													1
+												  </div>
+												  <div id="slide-3" class="medium">
+													2
+												  </div>
+												  <div id="slide-4" class="high">
+													3
+												  </div>
+												  <div id="slide-5" class="max">
+													4
+												  </div>
+												</div>
+											  </div>
+										</div>
+									</div>
+									
+								</section>
+							</article>
+
+						<!-- Diagnose -->
+							<article id="diagnose">
+								<h2 class="major">Diagnose</h2>
+								<!-- <span class="image main"><img src="assets/images/pic02.jpg" alt="" /></span> -->
+								<p>  Pain is a multifaceted experience influenced by both physiological and psychological factors, and it is challenging to detect. Nevertheless, the available data suggests that the shoe has the capability to sense and potentially diagnose pain.
+                                 <br/>Here are the results that will be analyzed in this scan.
+										<li>No Pain</li>
+										<li>Moderate Pain</li>
+										<li>Severe Pain</li>
+									</ul>
+								</p>
+								<h3 class="major">Pain Analysis (estimate)</h3>
+								<p>
+								On pressing the "Start Diagnosis" button, walk around as you would be doing normally. After stopping, check your results.
+								</p>
+								<p class="actions">
+									<input type="button" class="button primary btnDiagnose" id="btnStartDiagnose" name="btnStartDiagnose" onclick="startAccelerometer()" value="Start Diagnosis"/>
+									<input type="button" class="button red btnDiagnose" id="btnStopDiagnose" name="btnStopDiagnose" onclick="stopAccelerometer()" value="Stop Diagnosis"/>
+									<div id="chart-accel" class="container"></div>
+									<br/>
+									<hr>
+									<br/>
+									<div id="chart-load" class="container"></div>
+								</p>
+								<h3 class="major">Results:</h3>
+								<div> 
+									<span id="spnResults" class="resultText"></span>
+								</div>
+							
+							</article>
+
+						<!-- Heat -->
+							<article id="heat">
+								<h2 class="major">Heat</h2>
+								<!-- <span class="image main"><img src="assets/images/pic03.jpg" alt="" /></span> -->
+								<p>To keep your toes toasty on a 28 degree day, these shoes uses a heatpad that gets warmer to a temperature. Check out what I like to call "the foot sauna".</p>
+								<h3 class="major">Heat Slider</h3>
+								<p>Slide the slider from lukewarm to desert temperatures. Thank me later!</p>
+								</article>
+
+						<!-- Help -->
+							<article id="help">
+								<h2 class="major">Help</h2>
+								<span class="image main"><img src="assets/images/pic03.jpg" alt="" /></span>
+								<p>Lorem ipsum dolor sit amet, consectetur et adipiscing elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices. Aliquam libero et malesuada fames ac ante ipsum primis in faucibus. Cras viverra ligula sit amet ex mollis mattis lorem ipsum dolor sit amet.</p>
+							</article>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<p class="copyright">&copy; 2024. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+					</footer>
+
+			</div>
+
+		<!-- BG -->
+			<div id="bg"></div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/highcharts.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/sensor.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script>
+				
+	
+			</script>
+	</body>
+
+</html>
