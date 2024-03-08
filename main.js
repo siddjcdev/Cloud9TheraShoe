@@ -400,4 +400,147 @@
 						$main._show(location.hash.substr(1), true);
 					});
 
+		//Cloud9Shoe scripts
+		// var slider = document.getElementById("motorIntensity");
+		// var output = document.getElementById("motorIntensityValue");
+		// output.innerHTML = slider.value; // Display the default slider value
+
+		// // Update the current slider value (each time you drag the slider handle)
+		// slider.oninput = function() {
+		// 	output.innerHTML = this.value;
+		// 	var selected = this.value;
+		// 	if (selected == 1){
+		// 		stopsign.src = "assets/icons/start.png";
+		// 		crawl.src = "assets/icons/turtle_nocolor.png";
+		// 		walk.src = "assets/icons/walking_nocolor.png";
+		// 		run.src = "assets/icons/running_nocolor.png";
+		// 		fly.src = "assets/icons/jet_nocolor.png"
+		// 	}
+		// 	else if (selected == 2){
+		// 		stopsign.src = "assets/icons/stop.png";
+		// 		crawl.src = "assets/icons/turtle_color.png";
+		// 		walk.src = "assets/icons/walking_nocolor.png";
+		// 		run.src = "assets/icons/running_nocolor.png";
+		// 		fly.src = "assets/icons/jet_nocolor.png"
+		// 	} else if (selected == 3){
+		// 		stopsign.src = "assets/icons/stop.png";
+		// 		crawl.src = "assets/icons/turtle_nocolor.png";
+		// 		walk.src = "assets/icons/walking_color.png";
+		// 		run.src = "assets/icons/running_nocolor.png";
+		// 		fly.src = "assets/icons/jet_nocolor.png"
+		// 	}else if (selected == 4){
+		// 		stopsign.src = "assets/icons/stop.png";
+		// 		crawl.src = "assets/icons/turtle_nocolor.png";
+		// 		walk.src = "assets/icons/walking_nocolor.png";
+		// 		run.src = "assets/icons/running_color.png";
+		// 		fly.src = "assets/icons/jet_nocolor.png"
+		// 	}else if (selected == 5){
+		// 		stopsign.src = "assets/icons/stop.png";
+		// 		crawl.src = "assets/icons/turtle_nocolor.png";
+		// 		walk.src = "assets/icons/walking_nocolor.png";
+		// 		run.src = "assets/icons/running_nocolor.png";
+		// 		fly.src = "assets/icons/jet_color.png"
+		// 	}
+		// 	setMotorIntensity(selected)
+
+		// }
+
+/* 		$.post({
+			url: "/api/endpoint",
+			contentType: "application/json",
+			data: JSON.stringify({ key: value }),
+			success: function(response) {
+				// Handle the response here
+			},
+			error: function(xhr, status, error) {
+				// Handle errors
+			}
+		}); */
+
+		// $('.slider a').live('click', function(e) {
+		// 	alert('Button clicked! ID=' + $(this).attr('id'));
+
+		// });
+
+		// $('.slide-control').click(function(evt) {
+		// 	evt.preventDefault();
+		// 	alert('Button clicked! ID=' + $(this).attr('id'));
+		// 	var divId = 'summary' + $(this).attr('id');
+	
+		// 	//document.getElementById(divId).className = '';
+	
+		// });
+
+		// $('#slider1').on('click', function() {
+		// 	alert('Button clicked! ID=' + $(this).attr('id'));
+
+		// });
+		
+
+		// $(".solTitle a").live('click',function(e){
+        //     var contentId = "summary_" + $(this).attr('id');
+        //     $(".summary").hide();
+        //     $("#" + contentId).show();
+        // });
+
+		// var $slider1 = $('slider1');
+		// alert($slider1);
+		// $slider1.on('click', setMotorIntensity(0))
+		// slider1.onclick =setMotorIntensity(0)
+
+		
+
+		$('#btnDiagnose').on('click', function() {
+			alert('Button clicked!');
+			$.get({
+				url: "/accel" ,
+				contentType: "application/json",
+				success: function(response) {
+					// Handle the response here
+					console.log(response);
+				},
+				error: function(xhr, status, error) {
+					// Handle errors
+					console.log(error);
+				}
+			});
+		});
+
 })(jQuery);
+
+function setMotorIntensity(level) {
+	let postData = {
+	"action": "motor",
+	"level": level
+	};
+	console.log('postData'+ postData);
+	$.post({
+		url: "/motor/control" ,
+		contentType: "application/json",
+		data: JSON.stringify(postData),
+		success: function(response) {
+			// Handle the response here
+			console.log(response);
+		},
+		error: function(xhr, status, error) {
+			// Handle errors
+			console.log(error);
+		}
+	});		
+}
+
+/* function getAccelData() {
+	alert('Button clicked!');
+	$.get({
+		url: "/accel" ,
+		contentType: "application/json",
+		success: function(response) {
+			// Handle the response here
+			console.log(response);
+		},
+		error: function(xhr, status, error) {
+			// Handle errors
+			console.log(error);
+		}
+	});
+} */
