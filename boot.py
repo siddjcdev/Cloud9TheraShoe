@@ -1,4 +1,5 @@
 import network
+import config
 
 def do_connect(ssid, pwd):
     sta_if = network.WLAN(network.STA_IF)
@@ -27,10 +28,10 @@ def do_establish(ssid,pwd):
 #esp.osdebug(None)
  
 # Attempt to connect to WiFi network
-#do_connect("***", "*****")
+#do_connect(config.ssid, config.pwd)
     
 # Establish WiFi network
-do_establish("ShoeAP", "cloud9shoe")
+do_establish(config.ssid, config.pwd)
  
 # # import webrepl
 # # webrepl.start()
