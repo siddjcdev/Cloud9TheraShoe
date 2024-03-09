@@ -4,7 +4,6 @@ from microdot_asyncio import Microdot, Response, send_file
 from microdot_utemplate import render_template
 import motorManager
 import accelManager
-# import home_page
 
 Response.default_content_type = 'text/html'
 
@@ -72,4 +71,3 @@ def start_webserver():
         
         
 asyncio.run(start_webserver())
-

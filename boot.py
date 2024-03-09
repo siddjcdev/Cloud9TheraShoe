@@ -1,5 +1,6 @@
+import network
+
 def do_connect(ssid, pwd):
-    import network
     sta_if = network.WLAN(network.STA_IF)
     if not sta_if.isconnected():
         print('connecting to network...')
@@ -9,12 +10,27 @@ def do_connect(ssid, pwd):
             pass
     print('network config:', sta_if.ifconfig())
  
+def do_establish(ssid,pwd):
+    ap = network.WLAN(network.AP_IF)
+    ap.config(essid=ssid, password=pwd)
+    ap.active(True)
+
+    while ap.active == False:
+        pass
+
+    print("Access point is active.")
+    print(ap.ifconfig())
+
+
 # This file is executed on every boot (including wake-boot from deepsleep)
 #import esp
 #esp.osdebug(None)
  
 # Attempt to connect to WiFi network
-do_connect("SSNet", "Connect3624Now")
+#do_connect("***", "*****")
+    
+# Establish WiFi network
+do_establish("ShoeAP", "cloud9shoe")
  
-# import webrepl
-# webrepl.start()
+# # import webrepl
+# # webrepl.start()
