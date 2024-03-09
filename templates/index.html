@@ -41,11 +41,11 @@
 						</div>
 						<nav>
 							<ul>
-								<li><a href="#intro">Shoe</a></li>
-								<li><a href="#work">Diagnose</a></li>
-								<li><a href="#contact">AUTO</a></li>
-								<li><a href="#about">About</a></li>
-								<!--<li><a href="#elements">Elements</a></li>-->
+								<li><a href="#message">Massage</a></li>
+								<li><a href="#diagnose">Diagnose</a></li>
+								<li><a href="#heat">Heat</a></li>
+								<li><a href="#help">About</a></li>
+								<!-- <li><a href="#elements">Elements</a></li> -->
 							</ul>
 						</nav>
 					</header>
@@ -53,301 +53,113 @@
 				<!-- Main -->
 					<div id="main">
 
-						<!-- Intro -->
-							<article id="intro">
-								<h2 class="major">Shoe</h2>
-								<span class="image main"><img src="assets/images/pic01.jpg" alt="" /></span>
-								<p><div class="slidecontainer" style="width:100%;border:2px; border-left: 2px; border-color: brown; border-left-color: brown;  ">
-										<div class="table" style="width: 100%;">
-											<div class="column"style="width: 20%;"><img src="assets/icons/start.png" style="width:50%" id="stopsign"></div>
-											<div class="column"style="width: 20%;"><img src="assets/icons/turtle_nocolor.png" style="width:50%" id="crawl"></div>
-											<div class="column"style="width: 20%;"><img src="assets/icons/walking_nocolor.png" style="width:25%" id="walk"></div>
-											<div class="column"style="width: 20%;"><img src="assets/icons/running_nocolor.png" style="width:50%" id="run"></div>
-											<div class="column"style="width: 20%;"><img src="assets/icons/jet_nocolor.png" style="width:50%" id="fly"></div>
-										</div>
-										<div class="rows">
-											<div class="column column-span: 5;">
-						
-													<input type="range" min="1" max="5" value="0" class="slider" style="width:100%" id="motorIntensity">
-				
-											</div>
+						<!-- Message -->
+							<article id="message">
+								<h2 class="major">Massage</h2>
+								<P> This feature of the Cloud9 Therapeurtic Shoes uses the Raspberry Pi Pico and multiple vibrator motors to massage your foot. Be prepared to experience a spa on your legs!</P>
+								<section>
+									<!-- <span class="image main"><img src="assets/images/pic01.jpg" alt="" /></span> -->
+									<h3 class="major">Intensity Level</h3>
+									<p>This slider is for adjusting the intensity of the shoe's massage. Slide it to the right to start. You can also use the buttons to adjust the vibrator motors.</p>
+									<div id="outer-container">
+										<div id="inner-container">
+											<div class="slider">
+  
+												<a href="#slide-1" id="slider1" class="slide-control stop" onclick="setMotorIntensity(0)">S</a>
+												<a href="#slide-2" id="slider2" class="slide-control low" onclick="setMotorIntensity(1)">1</a>
+												<a href="#slide-3" id="slider3" class="slide-control medium" onclick="setMotorIntensity(2)">2</a>
+												<a href="#slide-4" id="slider4" class="slide-control high" onclick="setMotorIntensity(3)">3</a>
+												<a href="#slide-5" id="slider5" class="slide-control max" onclick="setMotorIntensity(4)">4</a>
+											  
+												<div class="slides">
+												  <div id="slide-1" class="stop">
+													Stop
+												  </div>
+												  <div id="slide-2" class="low">
+													1
+												  </div>
+												  <div id="slide-3" class="medium">
+													2
+												  </div>
+												  <div id="slide-4" class="high">
+													3
+												  </div>
+												  <div id="slide-5" class="max">
+													4
+												  </div>
+												</div>
+											  </div>
 										</div>
 									</div>
-								</p>
-								<p><span id="motorIntensityValue"></span></p>
+									
+								</section>
 							</article>
 
-						<!-- Work -->
-							<article id="work">
+						<!-- Diagnose -->
+							<article id="diagnose">
 								<h2 class="major">Diagnose</h2>
-								<span class="image main"><img src="assets/images/pic02.jpg" alt="" /></span>
-								<p>
-									<div id="sensor-chart" class="main sensor-chart" style="width: 50%; max-width: 400px;max-height: 400px;background: rgb(15, 255, 255);"></div>
+								<!-- <span class="image main"><img src="assets/images/pic02.jpg" alt="" /></span> -->
+								<p>  Pain is a multifaceted experience influenced by both physiological and psychological factors, and it is challenging to detect. Nevertheless, the available data suggests that the shoe has the capability to sense and potentially diagnose pain.
+                                 <br/>Here are the results that will be analyzed in this scan.
+										<li>No Pain</li>
+										<li>Moderate Pain</li>
+										<li>Severe Pain</li>
+									</ul>
 								</p>
+								<h3 class="major">Pain Analysis (estimate)</h3>
+								<p>
+								On pressing the "Start Diagnosis" button, walk around as you would be doing normally. After stopping, check your results.
+								</p>
+								<p class="actions">
+									<input type="button" class="button primary btnDiagnose" id="btnStartDiagnose" name="btnStartDiagnose" onclick="startAccelerometer()" value="Start Diagnosis"/>
+									<input type="button" class="button red btnDiagnose" id="btnStopDiagnose" name="btnStopDiagnose" onclick="stopAccelerometer()" value="Stop Diagnosis"/>
+									<div id="chart-accel" class="container"></div>
+									<br/>
+									<hr>
+									<br/>
+									<div id="chart-load" class="container"></div>
+								</p>
+								<h3 class="major">Results:</h3>
+								<div> 
+									<span id="spnResults"></span>
+								</div>
+							
 							</article>
 
-						<!-- About -->
-							<article id="about">
-								<h2 class="major">Help</h2>
-								<span class="image main"><img src="assets/images/pic03.jpg" alt="" /></span>
-								<p>Lorem ipsum dolor sit amet, consectetur et adipiscing elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices. Aliquam libero et malesuada fames ac ante ipsum primis in faucibus. Cras viverra ligula sit amet ex mollis mattis lorem ipsum dolor sit amet.</p>
-							</article>
-
-						<!-- Contact -->
-							<article id="contact">
-								<h2 class="major">Auto</h2>
-								<span class="image main"><img src="assets/images/pic03.jpg" alt="" /></span>
-								<p>This is a work in progress.</p>
-								<p>Auto mode will analyze the data sent from our pressure sensor, used to estimate pain levels, and adjust the intensity levels of the massaging vibrator motors with the data recieved.</p>
-							</article>
-
-						<!-- Elements -->
-							<article id="elements">
-								<h2 class="major">Elements</h2>
-
-								<section>
-									<h3 class="major">Text</h3>
-									<p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
-									This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
-									This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>. Finally, <a href="#">this is a link</a>.</p>
-									<hr />
-									<h2>Heading Level 2</h2>
-									<h3>Heading Level 3</h3>
-									<h4>Heading Level 4</h4>
-									<h5>Heading Level 5</h5>
-									<h6>Heading Level 6</h6>
-									<hr />
-									<h4>Blockquote</h4>
-									<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus lorem ipsum dolor sit amet nullam adipiscing eu felis.</blockquote>
-									<h4>Preformatted</h4>
-									<pre><code>i = 0;
-
-while (!deck.isInOrder()) {
-    print 'Iteration ' + i;
-    deck.shuffle();
-    i++;
-}
-
-print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
-								</section>
-
-								<section>
-									<h3 class="major">Lists</h3>
-
-									<h4>Unordered</h4>
-									<ul>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Sagittis adipiscing.</li>
-										<li>Felis enim feugiat.</li>
-									</ul>
-
-									<h4>Alternate</h4>
-									<ul class="alt">
-										<li>Dolor pulvinar etiam.</li>
-										<li>Sagittis adipiscing.</li>
-										<li>Felis enim feugiat.</li>
-									</ul>
-
-									<h4>Ordered</h4>
-									<ol>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Etiam vel felis viverra.</li>
-										<li>Felis enim feugiat.</li>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Etiam vel felis lorem.</li>
-										<li>Felis enim et feugiat.</li>
-									</ol>
-									<h4>Icons</h4>
-									<ul class="icons">
-										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-									</ul>
-
-									<h4>Actions</h4>
-									<ul class="actions">
-										<li><a href="#" class="button primary">Default</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-									<ul class="actions stacked">
-										<li><a href="#" class="button primary">Default</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-								</section>
-
-								<section>
-									<h3 class="major">Table</h3>
-									<h4>Default</h4>
-									<div class="table-wrapper">
-										<table>
-											<thead>
-												<tr>
-													<th>Name</th>
-													<th>Description</th>
-													<th>Price</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Item One</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Two</td>
-													<td>Vis ac commodo adipiscing arcu aliquet.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Three</td>
-													<td> Morbi faucibus arcu accumsan lorem.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Four</td>
-													<td>Vitae integer tempus condimentum.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Five</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-											</tbody>
-											<tfoot>
-												<tr>
-													<td colspan="2"></td>
-													<td>100.00</td>
-												</tr>
-											</tfoot>
-										</table>
-									</div>
-
-									<h4>Alternate</h4>
-									<div class="table-wrapper">
-										<table class="alt">
-											<thead>
-												<tr>
-													<th>Name</th>
-													<th>Description</th>
-													<th>Price</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Item One</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Two</td>
-													<td>Vis ac commodo adipiscing arcu aliquet.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Three</td>
-													<td> Morbi faucibus arcu accumsan lorem.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Four</td>
-													<td>Vitae integer tempus condimentum.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Five</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-											</tbody>
-											<tfoot>
-												<tr>
-													<td colspan="2"></td>
-													<td>100.00</td>
-												</tr>
-											</tfoot>
-										</table>
-									</div>
-								</section>
-
-								<section>
-									<h3 class="major">Buttons</h3>
-									<ul class="actions">
-										<li><a href="#" class="button primary">Primary</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-									<ul class="actions">
-										<li><a href="#" class="button">Default</a></li>
-										<li><a href="#" class="button small">Small</a></li>
-									</ul>
-									<ul class="actions">
-										<li><a href="#" class="button primary icon solid fa-download">Icon</a></li>
-										<li><a href="#" class="button icon solid fa-download">Icon</a></li>
-									</ul>
-									<ul class="actions">
-										<li><span class="button primary disabled">Disabled</span></li>
-										<li><span class="button disabled">Disabled</span></li>
-									</ul>
-								</section>
-
-								<section>
-									<h3 class="major">Form</h3>
-									<form method="post" action="#">
-										<div class="fields">
-											<div class="field half">
-												<label for="demo-name">Name</label>
-												<input type="text" name="demo-name" id="demo-name" value="" placeholder="Jane Doe" />
-											</div>
-											<div class="field half">
-												<label for="demo-email">Email</label>
-												<input type="email" name="demo-email" id="demo-email" value="" placeholder="jane@untitled.tld" />
-											</div>
-											<div class="field">
-												<label for="demo-category">Category</label>
-												<select name="demo-category" id="demo-category">
-													<option value="">-</option>
-													<option value="1">Manufacturing</option>
-													<option value="1">Shipping</option>
-													<option value="1">Administration</option>
-													<option value="1">Human Resources</option>
-												</select>
-											</div>
-											<div class="field half">
-												<input type="radio" id="demo-priority-low" name="demo-priority" checked>
-												<label for="demo-priority-low">Low</label>
-											</div>
-											<div class="field half">
-												<input type="radio" id="demo-priority-high" name="demo-priority">
-												<label for="demo-priority-high">High</label>
-											</div>
-											<div class="field half">
-												<input type="checkbox" id="demo-copy" name="demo-copy">
-												<label for="demo-copy">Email me a copy</label>
-											</div>
-											<div class="field half">
-												<input type="checkbox" id="demo-human" name="demo-human" checked>
-												<label for="demo-human">Not a robot</label>
-											</div>
-											<div class="field">
-												<label for="demo-message">Message</label>
-												<textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
-											</div>
+						<!-- Heat -->
+							<article id="heat">
+								<h2 class="major">Heat</h2>
+								<!-- <span class="image main"><img src="assets/images/pic03.jpg" alt="" /></span> -->
+								<p>To keep your toes toasty on a 28 degree day, these shoes uses a heatpad that gets warmer to a temperature. Check out what I like to call "the foot sauna".</p>
+								<h3 class="major">Heat Slider</h3>
+								<p>Slide the slider from lukewarm to desert temperatures. Thank me later!</p>
+								<div>
+									<div class="toggle-button-cover">
+										<div class="button-cover">
+										  <div class="tbutton r" id="button-5">
+											<input type="checkbox" class="checkbox" />
+											<div class="knobs"><span></span></div>
+											<div class="layer"></div>
+										  </div>
 										</div>
-										<ul class="actions">
-											<li><input type="submit" value="Send Message" class="primary" /></li>
-											<li><input type="reset" value="Reset" /></li>
-										</ul>
-									</form>
-								</section>
+									</div>
+								</div>
+							</article>
 
+
+						<!-- Help -->
+							<article id="help">
+								<h2 class="major">About</h2>
+								<span class="image main"><img src="assets/images/pic03.jpg" alt="" /></span>
+								<p>This shoe is a therpeutic shoe meant for inidviduals with constant leg pain that limits their mobility and exercise. The massage feature of this shoe helps users rest their feet when they have pain, with the help of 3 powerful vibrating motors, while the diagnose feature detects pain, using a special algroithm that involvs the X, Y, and Z, as well as pessure sensors and an accelerometer/gyroscope module. 
+								Finally, the heat feature uses a 5 x 10 heatpad. Users can control voltage coming to this pad and adjust the tempearture to any tempearture they like, from a range of 70 to 100 degrees.</p>
 							</article>
 
 					</div>
 
 				<!-- Footer -->
 					<footer id="footer">
-						<p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+						<p class="copyright">&copy; 2024. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
 					</footer>
 
 			</div>
@@ -359,53 +171,12 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/browser.min.js"></script>
 			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/highcharts.js"></script>
 			<script src="assets/js/util.js"></script>
-			<script src="assets/js/plotly-2.27.0.min.js"></script>
 			<script src="assets/js/sensor.js"></script>
 			<script src="assets/js/main.js"></script>
 			<script>
-				var slider = document.getElementById("motorIntensity");
-				var output = document.getElementById("motorIntensityValue");
-				output.innerHTML = slider.value; // Display the default slider value
-	
-				// Update the current slider value (each time you drag the slider handle)
-				slider.oninput = function() {
-					output.innerHTML = this.value;
-					var selected = this.value;
-					if (selected == 1){
-						stopsign.src = "assets/icons/start.png";
-						crawl.src = "assets/icons/turtle_nocolor.png";
-						walk.src = "assets/icons/walking_nocolor.png";
-						run.src = "assets/icons/running_nocolor.png";
-						fly.src = "assets/icons/jet_nocolor.png"
-					}
-					else if (selected == 2){
-						stopsign.src = "assets/icons/stop.png";
-						crawl.src = "assets/icons/turtle_color.png";
-						walk.src = "assets/icons/walking_nocolor.png";
-						run.src = "assets/icons/running_nocolor.png";
-						fly.src = "assets/icons/jet_nocolor.png"
-					} else if (selected == 3){
-						stopsign.src = "assets/icons/stop.png";
-						crawl.src = "assets/icons/turtle_nocolor.png";
-						walk.src = "assets/icons/walking_color.png";
-						run.src = "assets/icons/running_nocolor.png";
-						fly.src = "assets/icons/jet_nocolor.png"
-					}else if (selected == 4){
-						stopsign.src = "assets/icons/stop.png";
-						crawl.src = "assets/icons/turtle_nocolor.png";
-						walk.src = "assets/icons/walking_nocolor.png";
-						run.src = "assets/icons/running_color.png";
-						fly.src = "assets/icons/jet_nocolor.png"
-					}else if (selected == 5){
-						stopsign.src = "assets/icons/stop.png";
-						crawl.src = "assets/icons/turtle_nocolor.png";
-						walk.src = "assets/icons/walking_nocolor.png";
-						run.src = "assets/icons/running_nocolor.png";
-						fly.src = "assets/icons/jet_color.png"
-					}
-
-				}
+				
 	
 			</script>
 	</body>

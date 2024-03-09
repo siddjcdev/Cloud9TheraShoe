@@ -16,5 +16,5 @@ def do_connect(ssid, pwd):
 # Attempt to connect to WiFi network
 do_connect("SSNet", "Connect3624Now")
  
-import webrepl
-webrepl.start()
+# import webrepl
+# webrepl.start()
