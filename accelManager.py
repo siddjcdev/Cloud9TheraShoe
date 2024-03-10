@@ -5,6 +5,8 @@ import struct
 from math import atan, sqrt, pi
 import json
 
+
+
 # Read raw accelerometer and gyroscope data
 def read_mpu6050():
     data = i2c.readfrom_mem(mpu6050, 0x3B, 14)
@@ -13,14 +15,20 @@ def read_mpu6050():
 
 # Calculate pitch angle (in degrees)
 def calculate_pitch(ax, ay, az):
+    if (ax == 0 or ay == 0 or az == 0):
+        print ("One or more measurements are equal to 0")
     pitch_rad = atan(ax / sqrt(ay**2 + az**2))
     return pitch_rad * (180 / pi)
 
 def calculate_roll(ax, ay, az):
+    if ax == 0 or ay == 0 or az == 0:
+        print ("One or more measurements are equal to 0")
     roll_rad = atan(ay / sqrt(ax**2 + az**2))
     return roll_rad * (180 / pi)
 
 def calculate_yaw(ax, ay, az):
+    if ax == 0 or ay == 0 or az == 0:
+        print ("One or more measurements are equal to 0")
     yaw_rad = atan(az / sqrt(ax**2 + ay**2))
     return yaw_rad * (180 / pi)
 
@@ -39,11 +47,19 @@ def get_data():
 
         # Configure MPU6050
         i2c.writeto_mem(mpu6050, 0x6B, b'\x00')  # Wake up MPU6050
-        
+    except Exception as e:
+            print ("An error has occurred during initialization. Please try again. The error is:")
+            print (e)  
+    
+    try:
+
         while True:
             print("Entering into the while true loop...")
             led.on()
-            ax, ay, az, gx, gy, gz = read_mpu6050()
+            data = i2c.readfrom_mem(mpu6050, 0x3B, 14)
+            ax, ay, az, gx, gy, gz = struct.unpack('>hhhhhh', data)
+            #ax, ay, az, gx, gy, gz = read_mpu6050()
+            print(f"Pitch: {ax:.2f}, Roll: {ay:.2f},Yaw: {az:.2f}")
             pitch_angle = calculate_pitch(ax, ay, az)
             roll_angle = calculate_roll(ax, ay, az)
             yaw_angle = calculate_yaw(ax, ay, az)
