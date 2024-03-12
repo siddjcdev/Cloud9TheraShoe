@@ -178,6 +178,10 @@ const rollArray = [];   // Holds roll (y) data
 function startAccelerometer() {
   // Start the timer
   console.log('Starting diagnostics...');
+
+   // Stop the timer
+   clearInterval(timerId);
+
   timerId = setInterval(function ( ) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -237,7 +241,7 @@ function startAccelerometer() {
     };
     xhttp.open("GET", "/accel", true);
     xhttp.send();
-    }, 1000 ) ;// Update every second
+    }, 2000 ) ;// Update every second
 
 }
 

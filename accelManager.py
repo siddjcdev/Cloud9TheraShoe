@@ -4,6 +4,7 @@ import time
 import struct
 from math import atan, sqrt, pi
 import json
+import random
 
 
 
@@ -46,7 +47,7 @@ def get_data():
         mpu6050 = i2c.scan()[0]
 
         # Configure MPU6050
-        i2c.writeto_mem(mpu6050, 0x6B, b'\x00')  # Wake up MPU6050
+        i2c.writeto_mem(mpu6050, MPU6050_ADDRESS, b'\x00')  # Wake up MPU6050
     except Exception as e:
             print ("An error has occurred during initialization. Please try again. The error is:")
             print (e)  
@@ -69,9 +70,9 @@ def get_data():
                 "pitch": f"{pitch_angle:.2f}", 
                 "roll": f"{roll_angle:.2f}",
                 "yaw": f"{yaw_angle:.2f}",
-                "fore": 5.8,
-                "mid": 6.2,
-                "hind": 8.4
+                "fore":  f"{random.randrange(5,10):.2f}",
+                "mid": f"{random.randrange(5,10):.2f}",
+                "hind": f"{random.randrange(5,10):.2f}"
 
             }
             
@@ -82,12 +83,12 @@ def get_data():
         print ("An error has occurred. Please try again. The error is:")
         print (e)      
         data = {
-            "pitch": 25.5,
-            "roll": 35.5,
-            "yaw": 45.5,
-            "fore": 5.8,
-            "mid": 6.2,
-            "hind": 8.4
+            "pitch": f"{random.randrange(-18,10):.2f}",
+            "roll": f"{random.randrange(18,40):.2f}",
+            "yaw": f"{random.randrange(60,80):.2f}",
+            "fore":  f"{random.randrange(5,10):.2f}",
+            "mid": f"{random.randrange(5,10):.2f}",
+            "hind": f"{random.randrange(8,10):.2f}"
         }
             
         return json.dumps(data)

@@ -10,9 +10,9 @@ async def intensity(level):
     led.off()
 
     # Set up PWM Pin
-    motor1 = Pin(6, Pin.PULL_UP)
+    motor1 = Pin(12, Pin.PULL_UP)
     motor1_pwm = PWM(motor1)
-    motor2 = Pin(10, Pin.PULL_UP)
+    motor2 = Pin(7, Pin.PULL_UP)
     motor2_pwm = PWM(motor2)
 
 
@@ -32,7 +32,7 @@ async def intensity(level):
         print("The motors are off.")
     else:
         duty_cycle = duty_step * level
-        print("Intensity level:", level)
+        print("Intensity level:", level, "; duty_cycle:", duty_cycle)
     
     try:
       while True:
