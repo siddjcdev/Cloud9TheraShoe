@@ -1753,23 +1753,7 @@ input, select, textarea {
 
 	}
 
-	/* Button 5 */
-
-	/* * {
-		user-select: none;
-		-webkit-tap-highlight-color: transparent;
-	  }
-	  
-	  *:focus {
-		outline: none;
-	  } */
-	  
-	  /* body {
-		font-family: Arial, Helvetica, sans-serif;
-		margin: 0;
-		background-color: #f1f9f9;
-	  } */
-	  
+	
 	  #app-cover {
 		display: table;
 		width: 600px;
